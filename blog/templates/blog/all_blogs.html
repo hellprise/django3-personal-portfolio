@@ -1,0 +1,19 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог</title>
+</head>
+<body>
+    <h2>На странице присутствует такое кол-во постов: {{ blogs.count }}</h2>
+<!--    <h2>Сейчас написано {{ blogs.count }} пост{{ blogs.count|pluralize }}</h2> такая штука прибавляет к слову окончание "s", что говорит о множественном числе. но с русским языком это не прокатит(((-->
+    {% for blog in blogs %}
+    <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+        <h5>{{ blog.date|date:'j.m.y' }}</h5>
+        <p>{{ blog.description|truncatechars:100 }}</p>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}
